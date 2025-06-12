@@ -171,11 +171,6 @@ npm run build
 npm run preview
 ```
 
-### Deploy to Lovable
-1. Click the "Publish" button in Lovable
-2. Your app will be deployed to a Lovable subdomain
-3. Custom domains available with paid plans
-
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -184,9 +179,6 @@ npm run preview
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🆘 Support
 
@@ -206,4 +198,4 @@ For support with:
 
 ---
 
-**Built with ❤️ using React, TypeScript, and Payman SDK**
+
