@@ -3,22 +3,19 @@ import { toast } from "@/hooks/use-toast";
 import { PaymanClient } from "@paymanai/payman-ts";
 import { format } from "date-fns";
 
-// Payman credentials from environment variables
-const PAYMAN_CLIENT_ID = import.meta.env.VITE_PAYMAN_CLIENT_ID;
-const PAYMAN_CLIENT_SECRET = import.meta.env.VITE_PAYMAN_CLIENT_SECRET;
-
-if (!PAYMAN_CLIENT_ID || !PAYMAN_CLIENT_SECRET) {
-  console.warn("Payman credentials are not set in environment variables. Payman features will be disabled.");
-}
+// Payman credential
+const PAYMAN_CLIENT_ID = "pm-test-Rlr8-y4esv8cSJcDXd6Oi02t";
+const PAYMAN_CLIENT_SECRET = "xl-9pzcKZTe2sLoSHdnaBqhWddi_Bwv0v3ecSWwoP8lujh3avm3IGt4Jfd1uGkOy";
 
 let paymanClient: ReturnType<typeof PaymanClient.withCredentials> | null = null;
 
 // Initialize Payman client with user credentials
 export function initializePaymanClient(clientId: string, clientSecret: string) {
   try {
+    // Initialize with direct credentials
     paymanClient = PaymanClient.withCredentials({
-      clientId: clientId,
-      clientSecret: clientSecret
+      clientId: PAYMAN_CLIENT_ID,
+      clientSecret: PAYMAN_CLIENT_SECRET
     });
     console.log("Payman client initialized successfully");
     return true;
@@ -36,9 +33,6 @@ export function logoutPaymanClient() {
 
 // Ensure client is initialized
 async function ensureClientInitialized() {
-  if (!PAYMAN_CLIENT_ID || !PAYMAN_CLIENT_SECRET) {
-    throw new Error("Payman credentials are missing. Cannot initialize Payman client.");
-  }
   if (!paymanClient) {
     const initialized = initializePaymanClient(PAYMAN_CLIENT_ID, PAYMAN_CLIENT_SECRET);
     if (!initialized) {
