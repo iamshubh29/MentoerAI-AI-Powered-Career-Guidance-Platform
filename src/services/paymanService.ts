@@ -1,6 +1,7 @@
 import { BookingFormData, Mentor } from "@/types";
 import { toast } from "@/hooks/use-toast";
 import { PaymanClient } from "@paymanai/payman-ts";
+import { format } from "date-fns";
 
 // Payman credentials from environment variables
 const PAYMAN_CLIENT_ID = import.meta.env.VITE_PAYMAN_CLIENT_ID;
@@ -163,7 +164,11 @@ export async function bookMentorSession(bookingData: BookingFormData): Promise<{
   try {
     const client = await ensureClientInitialized();
     
-    const response = await client.ask(`Book a session with payee ID ${bookingData.mentorId} for ${bookingData.sessionDate} at ${bookingData.sessionTime} for ${bookingData.sessionDuration} minutes. Topic: ${bookingData.topic}. Goals: ${bookingData.goals}.`, {
+    // Format the date and time for the booking
+    const formattedDate = format(bookingData.sessionDate, 'MMMM d, yyyy');
+    const bookingMessage = `Book a session with payee ID ${bookingData.mentorId} for ${formattedDate} at ${bookingData.sessionTime} for ${bookingData.sessionDuration} minutes. Topic: ${bookingData.topic}. Goals: ${bookingData.goals}.`;
+    
+    const response = await client.ask(bookingMessage, {
       onMessage: (message) => {
         console.log("Received booking update:", message);
       },
@@ -171,11 +176,12 @@ export async function bookMentorSession(bookingData: BookingFormData): Promise<{
         source: "mentor-booking",
         requestType: "book_session",
         mentorId: bookingData.mentorId,
-        sessionDate: bookingData.sessionDate,
+        sessionDate: formattedDate,
         sessionTime: bookingData.sessionTime,
         sessionDuration: bookingData.sessionDuration,
         topic: bookingData.topic,
-        goals: bookingData.goals
+        goals: bookingData.goals,
+        paymentAmount: bookingData.paymentAmount
       }
     });
     

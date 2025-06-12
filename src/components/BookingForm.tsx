@@ -8,7 +8,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { BookingFormData, Mentor } from "@/types";
 import { format } from "date-fns";
-import { bookMentorSession, makePaymentFromCart, getWalletBalance } from "@/services/paymanService";
+import { makePaymentFromCart, getWalletBalance } from "@/services/paymanService";
 import { toast } from "@/hooks/use-toast";
 
 interface BookingFormProps {
@@ -35,32 +35,32 @@ const BookingForm = ({ mentor, onClose, onSuccess }: BookingFormProps) => {
     // Update payment amount when duration changes
     const hourlyRate = mentor.hourlyRate;
     const hours = formData.sessionDuration / 60;
-    setFormData({
-      ...formData,
+    setFormData(prev => ({
+      ...prev,
       paymentAmount: Math.round(hourlyRate * hours * 100) / 100
-    });
+    }));
   }, [formData.sessionDuration, mentor.hourlyRate]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, field: keyof BookingFormData) => {
-    setFormData({
-      ...formData,
+    setFormData(prev => ({
+      ...prev,
       [field]: e.target.value
-    });
+    }));
   };
 
   const handleSelectChange = (value: string | number, field: keyof BookingFormData) => {
-    setFormData({
-      ...formData,
+    setFormData(prev => ({
+      ...prev,
       [field]: value
-    });
+    }));
   };
 
   const handleDateChange = (date: Date | undefined) => {
     if (date) {
-      setFormData({
-        ...formData,
+      setFormData(prev => ({
+        ...prev,
         sessionDate: date
-      });
+      }));
       setIsDatePickerOpen(false);
     }
   };
@@ -70,8 +70,20 @@ const BookingForm = ({ mentor, onClose, onSuccess }: BookingFormProps) => {
     setIsSubmitting(true);
     setError(null);
 
+    // Validate form data
+    if (!formData.topic.trim() || !formData.goals.trim() || !formData.sessionTime) {
+      setError("Please fill in all required fields");
+      toast({
+        title: "Validation Error",
+        description: "Please fill in all required fields",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
-      // First make the payment
+      // Make the payment
       const paymentResult = await makePaymentFromCart(formData, mentor.name);
       console.log("Payment result:", paymentResult);
 
@@ -82,10 +94,10 @@ const BookingForm = ({ mentor, onClose, onSuccess }: BookingFormProps) => {
         const expectedBalance = previousBalance - formData.paymentAmount;
         
         if (Math.abs(previousBalance - expectedBalance) < 0.01) {
-          // Payment was actually successful, proceed with booking
+          // Payment was actually successful
           toast({
             title: "Payment Successful",
-            description: "Your payment has been processed successfully. Proceeding with booking...",
+            description: "Your payment has been processed successfully.",
           });
         } else {
           // Payment actually failed
@@ -100,60 +112,40 @@ const BookingForm = ({ mentor, onClose, onSuccess }: BookingFormProps) => {
       } else {
         toast({
           title: "Payment Successful",
-          description: "Your payment has been processed successfully. Proceeding with booking...",
+          description: "Your payment has been processed successfully.",
         });
       }
 
-      // Close the booking form and trigger success callback
+      // Store session details in localStorage
+      const sessionDetails = {
+        id: `session-${Date.now()}`,
+        mentorId: mentor.id,
+        mentorName: mentor.name,
+        date: format(formData.sessionDate, "yyyy-MM-dd"),
+        time: formData.sessionTime,
+        duration: formData.sessionDuration,
+        topic: formData.topic,
+        goals: formData.goals,
+        amount: formData.paymentAmount,
+        status: "confirmed",
+        createdAt: new Date().toISOString()
+      };
+
+      // Get existing sessions or initialize empty array
+      const existingSessions = JSON.parse(localStorage.getItem("bookedSessions") || "[]");
+      existingSessions.push(sessionDetails);
+      localStorage.setItem("bookedSessions", JSON.stringify(existingSessions));
+
+      // Close form and trigger success callback
       onClose();
       onSuccess();
 
-      // Then book the session
-      const bookingResult = await bookMentorSession({
-        mentorId: mentor.id,
-        sessionDate: formData.sessionDate,
-        sessionTime: formData.sessionTime,
-        duration: formData.sessionDuration,
-        paymentAmount: formData.paymentAmount,
-        paymentStatus: "completed",
-        paymentMethod: "TDS",
-        paymentId: `PAY-${Date.now()}`,
-        paymentDate: new Date().toISOString(),
-        paymentDetails: {
-          currency: "TDS",
-          amount: formData.paymentAmount,
-          status: "completed",
-          method: "TDS",
-          transactionId: `TXN-${Date.now()}`,
-          timestamp: new Date().toISOString(),
-          description: `Payment for session with ${mentor.name}`,
-          metadata: {
-            mentorId: mentor.id,
-            sessionDate: formData.sessionDate,
-            sessionTime: formData.sessionTime,
-            duration: formData.sessionDuration
-          }
-        }
-      });
-
-      if (bookingResult.success) {
-        toast({
-          title: "Booking Confirmed",
-          description: `Your session with ${mentor.name} has been booked successfully.`,
-        });
-      } else {
-        toast({
-          title: "Booking Failed",
-          description: "Your payment was successful, but there was an error booking the session. Please contact support.",
-          variant: "destructive",
-        });
-      }
     } catch (err) {
-      console.error("Error in booking process:", err);
-      setError(err instanceof Error ? err.message : "An error occurred during booking");
+      console.error("Error in payment process:", err);
+      setError(err instanceof Error ? err.message : "An error occurred during payment");
       toast({
         title: "Error",
-        description: err instanceof Error ? err.message : "An error occurred during booking",
+        description: err instanceof Error ? err.message : "An error occurred during payment",
         variant: "destructive",
       });
     } finally {
@@ -286,7 +278,7 @@ const BookingForm = ({ mentor, onClose, onSuccess }: BookingFormProps) => {
         <Button 
           type="submit" 
           className="bg-career-primary hover:bg-career-primary/90" 
-          disabled={isSubmitting || !formData.sessionTime}
+          disabled={isSubmitting || !formData.sessionTime || !formData.topic || !formData.goals}
         >
           {isSubmitting ? "Processing..." : "Confirm & Pay"}
         </Button>
