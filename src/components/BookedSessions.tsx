@@ -4,8 +4,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { toast } from "@/hooks/use-toast";
-import { Video, AlertCircle } from "lucide-react";
+import { Video, AlertCircle, MessageSquare, Calendar } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import Chat from "./Chat";
+import { sendCalendarInvite } from "@/services/calendarService";
 
 interface BookedSession {
   id: string;
@@ -26,6 +29,8 @@ const BookedSessions = () => {
   const [sessions, setSessions] = useState<BookedSession[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedSession, setSelectedSession] = useState<BookedSession | null>(null);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   const generateMeetLink = (sessionId: string) => {
     // Generate a valid Google Meet code (10-11 characters, letters and numbers only)
@@ -93,18 +98,7 @@ const BookedSessions = () => {
     }
     
     try {
-      // Ensure the URL is properly formatted
-      let formattedLink = meetLink;
-      if (!meetLink.startsWith('http')) {
-        formattedLink = `https://meet.google.com/${meetLink}`;
-      }
-      
-      // Open in new tab with proper Google Meet parameters
-      const meetUrl = new URL(formattedLink);
-      meetUrl.searchParams.set('authuser', '0');
-      meetUrl.searchParams.set('hs', '179');
-      
-      window.open(meetUrl.toString(), '_blank', 'noopener,noreferrer');
+      window.open(meetLink, '_blank', 'noopener,noreferrer');
     } catch (err) {
       console.error("Error opening meeting link:", err);
       toast({
@@ -137,6 +131,59 @@ const BookedSessions = () => {
       toast({
         title: "Error",
         description: "Failed to cancel session. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleOpenChat = (session: BookedSession) => {
+    setSelectedSession(session);
+    setIsChatOpen(true);
+  };
+
+  const handleSendCalendarInvite = async (session: BookedSession) => {
+    try {
+      // Show loading state
+      toast({
+        title: "Creating Calendar Invite",
+        description: "Please wait...",
+      });
+
+      // Format date to YYYY-MM-DD if it's not already in that format
+      const formattedDate = format(new Date(session.date), 'yyyy-MM-dd');
+      
+      // Ensure time is in HH:mm format
+      const formattedTime = session.time.includes(':') 
+        ? session.time 
+        : `${session.time.slice(0, 2)}:${session.time.slice(2)}`;
+
+      await sendCalendarInvite(
+        "mentor@example.com", // Replace with actual mentor email
+        "student@example.com", // Replace with actual student email
+        {
+          topic: session.topic,
+          date: formattedDate,
+          time: formattedTime,
+          duration: session.duration
+        }
+      );
+
+      // Show success message
+      toast({
+        title: "Success",
+        description: "Calendar invite created successfully. Please check your browser for the popup.",
+      });
+    } catch (err) {
+      console.error("Error sending calendar invite:", err);
+      
+      // Show specific error message based on the error
+      const errorMessage = err instanceof Error 
+        ? err.message 
+        : "Failed to send calendar invite. Please try again.";
+      
+      toast({
+        title: "Error",
+        description: errorMessage,
         variant: "destructive",
       });
     }
@@ -229,6 +276,24 @@ const BookedSessions = () => {
                     )
                   )}
                   <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleOpenChat(session)}
+                    className="flex items-center gap-2"
+                  >
+                    <MessageSquare className="h-4 w-4" />
+                    Chat
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleSendCalendarInvite(session)}
+                    className="flex items-center gap-2"
+                  >
+                    <Calendar className="h-4 w-4" />
+                    Calendar
+                  </Button>
+                  <Button
                     variant="destructive"
                     size="sm"
                     onClick={() => handleCancelSession(session.id)}
@@ -261,6 +326,20 @@ const BookedSessions = () => {
           ))}
         </div>
       </CardContent>
+
+      <Dialog open={isChatOpen} onOpenChange={setIsChatOpen}>
+        <DialogContent className="max-w-4xl">
+          {selectedSession && (
+            <Chat
+              sessionId={selectedSession.id}
+              mentorId={selectedSession.mentorId}
+              studentId="student123" // Replace with actual student ID
+              mentorName={selectedSession.mentorName}
+              studentName="Student" // Replace with actual student name
+            />
+          )}
+        </DialogContent>
+      </Dialog>
     </Card>
   );
 };
