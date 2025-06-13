@@ -1,80 +1,86 @@
 # MentoerAI – AI-Powered Career Guidance Platform
 
-MentoerAI is a modern, AI-powered career guidance and mentorship booking platform integrated with Payman. Users can generate personalized career paths using the Gemini API, analyze their resumes with an ATS tracker, and book paid mentorship sessions seamlessly.
+MentoerAI is a modern, AI-powered career guidance and mentorship booking platform integrated with **Payman**. It empowers users to generate personalized career paths using the **Gemini API**, analyze their resumes with an ATS tracker, and seamlessly book paid mentorship sessions. The platform ensures secure, direct payments to mentors (Payman payees) when sessions are booked, creating a transparent and trusted environment for both mentors and mentees.
 
-Live App: [🔗 Vercel Link](https://payman-project.vercel.app/)
+🌐 **Live App:** [🔗 Vercel Link](https://payman-project.vercel.app/)
 
 ---
 
 ## 🎯 Key Features
 
 ### 🧭 Career Path Generator
+- Generate personalized career paths using the **Gemini API**
+- AI-driven recommendations tailored to user interests and skills
+- Display structured learning roadmap and skill development plan
 
-* Generate personalized career paths using the **Gemini API**
-* AI-driven recommendations based on interests and skills
-* Display structured learning roadmap and skill development plan
-
-### 🧑‍💼 Resume ATS Checker
-
-* Upload resumes in PDF format
-* Analyze ATS (Applicant Tracking System) compatibility
-* Get section-wise feedback (Summary, Skills, Experience, etc.)
-* Improve suggestions and scoring system
+### 📄 Resume ATS Checker
+- Upload resumes in PDF format
+- Analyze ATS (Applicant Tracking System) compatibility
+- Section-wise feedback (Summary, Skills, Experience, etc.)
+- Improvement suggestions and scoring system
 
 ### 👨‍🏫 Mentor Booking System
-
-* **Real Mentors via Payman**: Fetch mentors from your Payman payees
-* **Book Sessions**: Schedule one-on-one mentoring sessions
-* **Add to Calendar**: Automatically add booked sessions to your calendar
-* **Chat with Mentor**: Initiate and maintain chat with mentor before and after session
-* **Payment Processing**: Use Payman SDK for secure transactions
-* **Cancel Meeting**: Cancel sessions directly on the platform
-* **Booked Sessions Tracker**: View your upcoming and past bookings
-* **Add Mentor**: Admins or mentors can add themselves, visible in real-time
+- **Real Mentors via Payman Payees**: Mentors are Payman payees, fetched directly from your Payman dashboard
+- **Book Sessions**: Schedule one-on-one mentoring sessions
+- **Secure Payment to Payee**: When a session is booked, the payment is directly transferred to the mentor’s Payman account
+- **Add to Calendar**: Automatically add booked sessions to your calendar
+- **Chat with Mentor**: Initiate and maintain chat before and after the session
+- **Cancel Meeting**: Cancel sessions directly on the platform
+- **Booked Sessions Tracker**: View your upcoming and past bookings in one place
+- **Add Mentor**: Admins or mentors can add themselves as payees on Payman, making them instantly available on the platform
 
 ### 💼 Admin & Mentor Tools
-
-* Role-based mentor/admin addition
-* Track all bookings and cancellations
-* Admin Panel with wallet, history, and mentor control
+- Role-based admin/mentor addition and management
+- View and control mentors fetched as Payman payees
+- Track all session bookings, cancellations, and transactions in real-time
+- Admin panel with wallet, session history, and mentor control
 
 ---
+
+## 🧩 How It Helps
+
+✅ **Direct Mentor Payments**  
+Every time a session is booked, the system ensures secure and instant payment to the mentor (Payman payee), eliminating manual tracking of dues and ensuring trust on both ends.
+
+✅ **One-stop Mentorship Management**  
+From booking to calendar integration, chatting, and session management, everything is handled on MentoerAI — reducing effort for both users and mentors.
+
+✅ **Secure & Transparent**  
+All mentors are verified as Payman payees, and payments are processed securely through Payman SDK, providing peace of mind to both parties.
+
+---
+
 ## 📱 Application Screenshots
 
 ### 1. Home Page
 ![Home Page](public/screenshots/home-page.PNG)
-*Landing page with feature overview and navigation*
 
 ### 2. Career Generator
 ![Career Generator](public/screenshots/career-generator.PNG)
-*AI-powered career path recommendations based on your profile*
 
 ### 3. Mentor Booking - Login
 ![Mentor Booking Login](public/screenshots/mentor-booking-login.PNG)
-*Payman credentials input for secure connection*
 
 ### 4. Mentor Booking - Mentor List
 ![Mentor List](public/screenshots/mentor-list.PNG)
-*List of available mentors fetched from Payman payees*
 
 ### 5. Booking Form
 ![Booking Form](public/screenshots/booking-form.PNG)
-*Session booking form with payment integration*
-### 6.  Booked Sessions
+
+### 6. Booked Sessions
 ![Booked Sessions](public/screenshots/booked-session.PNG)
-View of all successfully booked sessions with mentor details, date, calander and chat.
+
 ### 7. Resume ATS Checker
 ![Resume Checker](public/screenshots/resume-checker.PNG)
-*Resume upload and ATS score analysis interface*
 
 ### 8. Resume Results
 ![Resume Results](public/screenshots/resume-results.PNG)
-*Detailed ATS score breakdown with improvement suggestions*
+
+---
 
 ## 🧩 Application Flows
 
 ### 🧠 Career Path Flow
-
 ```
 User Login
     ↓
@@ -88,7 +94,6 @@ View Suggestions & Skill Plan
 ```
 
 ### 📄 Resume Checker Flow
-
 ```
 User Uploads Resume
     ↓
@@ -100,15 +105,14 @@ Score Breakdown & Suggestions
 ```
 
 ### 🧑‍🏫 Mentor Booking Flow
-
 ```
 User Authenticates
     ↓
-Fetch Payman Mentors
+Fetch Payman Payees (Mentors)
     ↓
 Select Mentor + Slot
     ↓
-Make Payment via Payman
+Make Payment via Payman → Direct to Payee
     ↓
 Booking Confirmed
     ↓
@@ -120,7 +124,6 @@ View in Booked Sessions
 ```
 
 ### 🔁 Session Management Flow
-
 ```
 User Books Session
     ↓
@@ -134,89 +137,55 @@ User Can:
 ```
 
 ### 🏢 Admin Flow
-
 ```
 Admin Login
     ↓
 Mentor Management Page
     ↓
-Add/View Mentors
+Add Mentors (as Payman Payees)
     ↓
-Book Session with Mentor
-    ↓
-Cancel/Join Google Meet with Mentor
+View / Book / Cancel / Join Google Meet
     ↓
 Add to Calendar / Initiate Chat
     ↓
 Track Session Activity
     ↓
-View Transaction History via Payman
+View Transaction History (via Payman)
 ```
 
 ---
 
-## 📦 Installation Guide
+## 🔐 Security Features
+- LocalStorage authentication for secure sessions
+- No sensitive user credentials stored in DB
+- Payman SDK manages all transactions securely
+- Payments directly handled between user and mentor (payee)
+- Role-based session and admin protection
+- Full error handling and user-friendly alerts
 
+---
+
+## 📦 Installation Guide
 ```bash
 git clone <your-repo-url>
 cd mentoer-ai
 npm install
 npm run dev
 ```
-
 Open in browser: `http://localhost:5173`
 
 ---
 
-## 🔧 Payman Setup
-
-### Prerequisites
-
-* A Payman account with Client ID and Secret
-
-### Steps
-
-1. Go to Mentor Booking page
-2. Enter Payman Credentials:
-
-   * Client ID (starts with `pm-`)
-   * Client Secret
-3. Click “Connect to Payman”
-
-### Features After Connection
-
-* Fetch Payees (Mentors)
-* Book & Pay for Sessions
-* View Transaction History
-* Check Wallet Balance
-
----
-
----
-
-## 🔐 Security Features
-
-* LocalStorage authentication
-* No credentials stored in DB
-* Secure Payman token management
-* Role-based session protection
-* Error handling and user alerts
-
----
-
 ## 🚀 Deployment
-
 ```bash
 npm run build
 npm run preview
 ```
-
-Platform Hosted on: [Vercel](https://vercel.com)
+Hosted on: [Vercel](https://vercel.com)
 
 ---
 
 ## 🤝 Contributing
-
 1. Fork the repo
 2. Create your feature branch (`git checkout -b feature/awesome`)
 3. Commit your changes (`git commit -m 'Add awesome feature'`)
@@ -226,22 +195,21 @@ Platform Hosted on: [Vercel](https://vercel.com)
 ---
 
 ## 📬 Support
-
-* Gemini API: [Google Developers](https://developers.google.com/)
-* Payman SDK Docs: [Payman Docs](https://docs.payman.ai)
-* Raise issues in the repo for bugs/requests
+- Gemini API: [Google Developers](https://developers.google.com/)
+- Payman SDK Docs: [Payman Docs](https://docs.payman.ai)
+- Raise issues in the repo for bugs/requests
 
 ---
 
 ## ✅ Milestones
-
 * ✅ AI-powered roadmap generator (Gemini)
 * ✅ Resume parser & ATS checker
 * ✅ Payman-integrated mentorship system
 * ✅ Real-time session cancel and booking updates
-* ✅ Session tracker & mentor onboarding
+* ✅ Session tracker & mentor onboarding via Payman payees
 * ✅ Admin flow and role-based mentor control
 
 ---
 
-Built with ❤️ by Shubh Marwadi
+**Built with ❤️ by Shubh Marwadi**
+
