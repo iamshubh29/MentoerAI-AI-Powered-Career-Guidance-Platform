@@ -62,7 +62,7 @@ Live Demo: [🔗 Video Demo](#)
 ![Booking Form](public/screenshots/booking-form.PNG)
 *Session booking form with payment integration*
 ### 6.  Booked Sessions
-![Booked Sessions](public/screenshots/booked-session.png)
+![Booked Sessions](public/screenshots/booked-session.PNG)
 View of all successfully booked sessions with mentor details, date, calander and chat.
 ### 7. Resume ATS Checker
 ![Resume Checker](public/screenshots/resume-checker.PNG)
