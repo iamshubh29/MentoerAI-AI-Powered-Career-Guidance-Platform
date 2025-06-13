@@ -43,31 +43,31 @@ Live Demo: [🔗 Video Demo](#)
 ## 📱 Application Screenshots
 
 ### 1. Home Page
-![Home Page](public/screenshots/home-page.png)
+![Home Page](public/screenshots/home-page.PNG)
 *Landing page with feature overview and navigation*
 
 ### 2. Career Generator
-![Career Generator](public/screenshots/career-generator.png)
+![Career Generator](public/screenshots/career-generator.PNG)
 *AI-powered career path recommendations based on your profile*
 
 ### 3. Mentor Booking - Login
-![Mentor Booking Login](public/screenshots/mentor-booking-login.png)
+![Mentor Booking Login](public/screenshots/mentor-booking-login.PNG)
 *Payman credentials input for secure connection*
 
 ### 4. Mentor Booking - Mentor List
-![Mentor List](public/screenshots/mentor-list.png)
+![Mentor List](public/screenshots/mentor-list.PNG)
 *List of available mentors fetched from Payman payees*
 
 ### 5. Booking Form
-![Booking Form](public/screenshots/booking-form.png)
+![Booking Form](public/screenshots/booking-form.PNG)
 *Session booking form with payment integration*
 
 ### 6. Resume ATS Checker
-![Resume Checker](public/screenshots/resume-checker.png)
+![Resume Checker](public/screenshots/resume-checker.PNG)
 *Resume upload and ATS score analysis interface*
 
 ### 7. Resume Results
-![Resume Results](public/screenshots/resume-results.png)
+![Resume Results](public/screenshots/resume-results.PNG)
 *Detailed ATS score breakdown with improvement suggestions*
 ## 🧩 Application Flows
 
