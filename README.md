@@ -2,7 +2,7 @@
 
 MentoerAI is a modern, AI-powered career guidance and mentorship booking platform integrated with Payman. Users can generate personalized career paths using the Gemini API, analyze their resumes with an ATS tracker, and book paid mentorship sessions seamlessly.
 
-Live App: [🔗 Vercel Link](#)
+Live App: [🔗 Vercel Link](https://payman-project.vercel.app/)
 Live Demo: [🔗 Video Demo](#)
 
 ---
