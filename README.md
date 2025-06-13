@@ -37,44 +37,47 @@ MentoerAI is a modern, AI-powered career guidance and mentorship booking platfor
 
 ---
 
-## 🧩 How It Helps
-
-✅ **Direct Mentor Payments**  
-Every time a session is booked, the system ensures secure and instant payment to the mentor (Payman payee), eliminating manual tracking of dues and ensuring trust on both ends.
-
-✅ **One-stop Mentorship Management**  
-From booking to calendar integration, chatting, and session management, everything is handled on MentoerAI — reducing effort for both users and mentors.
-
-✅ **Secure & Transparent**  
-All mentors are verified as Payman payees, and payments are processed securely through Payman SDK, providing peace of mind to both parties.
-
----
-
 ## 📱 Application Screenshots
 
-### 1. Home Page
-![Home Page](public/screenshots/home-page.PNG)
+<div align="center">
+  <img src="public/screenshots/home-page.PNG" alt="Home Page" width="300" style="border:1px solid #ccc; padding:4px;" />
+  <p><em>Home Page</em></p>
+</div>
 
-### 2. Career Generator
-![Career Generator](public/screenshots/career-generator.PNG)
+<div align="center">
+  <img src="public/screenshots/career-generator.PNG" alt="Career Generator" width="300" style="border:1px solid #ccc; padding:4px;" />
+  <p><em>Career Generator</em></p>
+</div>
 
-### 3. Mentor Booking - Login
-![Mentor Booking Login](public/screenshots/mentor-booking-login.PNG)
+<div align="center">
+  <img src="public/screenshots/mentor-booking-login.PNG" alt="Mentor Booking Login" width="300" style="border:1px solid #ccc; padding:4px;" />
+  <p><em>Mentor Booking Login</em></p>
+</div>
 
-### 4. Mentor Booking - Mentor List
-![Mentor List](public/screenshots/mentor-list.PNG)
+<div align="center">
+  <img src="public/screenshots/mentor-list.PNG" alt="Mentor List" width="300" style="border:1px solid #ccc; padding:4px;" />
+  <p><em>Mentor List</em></p>
+</div>
 
-### 5. Booking Form
-![Booking Form](public/screenshots/booking-form.PNG)
+<div align="center">
+  <img src="public/screenshots/booking-form.PNG" alt="Booking Form" width="300" style="border:1px solid #ccc; padding:4px;" />
+  <p><em>Booking Form</em></p>
+</div>
 
-### 6. Booked Sessions
-![Booked Sessions](public/screenshots/booked-session.PNG)
+<div align="center">
+  <img src="public/screenshots/booked-session.PNG" alt="Booked Sessions" width="300" style="border:1px solid #ccc; padding:4px;" />
+  <p><em>Booked Sessions</em></p>
+</div>
 
-### 7. Resume ATS Checker
-![Resume Checker](public/screenshots/resume-checker.PNG)
+<div align="center">
+  <img src="public/screenshots/resume-checker.PNG" alt="Resume Checker" width="300" style="border:1px solid #ccc; padding:4px;" />
+  <p><em>Resume ATS Checker</em></p>
+</div>
 
-### 8. Resume Results
-![Resume Results](public/screenshots/resume-results.PNG)
+<div align="center">
+  <img src="public/screenshots/resume-results.PNG" alt="Resume Results" width="300" style="border:1px solid #ccc; padding:4px;" />
+  <p><em>Resume Results</em></p>
+</div>
 
 ---
 
@@ -212,4 +215,3 @@ Hosted on: [Vercel](https://vercel.com)
 ---
 
 **Built with ❤️ by Shubh Marwadi**
-
