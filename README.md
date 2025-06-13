@@ -61,14 +61,17 @@ Live Demo: [🔗 Video Demo](#)
 ### 5. Booking Form
 ![Booking Form](public/screenshots/booking-form.PNG)
 *Session booking form with payment integration*
-
-### 6. Resume ATS Checker
+### 6.  Booked Sessions
+![Booked Sessions](public/screenshots/booked-session.png)
+View of all successfully booked sessions with mentor details, date, calander and chat.
+### 7. Resume ATS Checker
 ![Resume Checker](public/screenshots/resume-checker.PNG)
 *Resume upload and ATS score analysis interface*
 
-### 7. Resume Results
+### 8. Resume Results
 ![Resume Results](public/screenshots/resume-results.PNG)
 *Detailed ATS score breakdown with improvement suggestions*
+
 ## 🧩 Application Flows
 
 ### 🧠 Career Path Flow
