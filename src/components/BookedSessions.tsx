@@ -4,6 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { toast } from "@/hooks/use-toast";
+import { Video, AlertCircle } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface BookedSession {
   id: string;
@@ -17,6 +19,7 @@ interface BookedSession {
   amount: number;
   status: string;
   createdAt: string;
+  meetLink?: string;
 }
 
 const BookedSessions = () => {
@@ -24,18 +27,45 @@ const BookedSessions = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const generateMeetLink = (sessionId: string) => {
+    // Generate a valid Google Meet code (10-11 characters, letters and numbers only)
+    const chars = 'abcdefghijklmnopqrstuvwxyz';
+    const numbers = '0123456789';
+    const allChars = chars + numbers;
+    
+    // Generate a random code of 10-11 characters
+    const length = Math.random() < 0.5 ? 10 : 11;
+    const meetingCode = Array.from(
+      { length },
+      () => allChars[Math.floor(Math.random() * allChars.length)]
+    ).join('');
+    
+    return `https://meet.google.com/${meetingCode}`;
+  };
+
   const loadSessions = () => {
     try {
       const storedSessions = localStorage.getItem("bookedSessions");
       if (storedSessions) {
         const parsedSessions = JSON.parse(storedSessions);
+        console.log("Loaded sessions:", parsedSessions);
+        
+        // Add the specific meet link
+        const sessionsWithMeetLink = parsedSessions.map((session: BookedSession) => ({
+          ...session,
+          meetLink: "https://meet.google.com/hey-rxip-zau" // Specific meet link
+        }));
+        
         // Sort sessions by date and time
-        parsedSessions.sort((a: BookedSession, b: BookedSession) => {
+        sessionsWithMeetLink.sort((a: BookedSession, b: BookedSession) => {
           const dateA = new Date(`${a.date}T${a.time}`);
           const dateB = new Date(`${b.date}T${b.time}`);
           return dateA.getTime() - dateB.getTime();
         });
-        setSessions(parsedSessions);
+        setSessions(sessionsWithMeetLink);
+        
+        // Update localStorage with the meet link
+        localStorage.setItem("bookedSessions", JSON.stringify(sessionsWithMeetLink));
       }
     } catch (err) {
       console.error("Error loading sessions:", err);
@@ -51,6 +81,39 @@ const BookedSessions = () => {
     const interval = setInterval(loadSessions, 5 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
+
+  const handleJoinMeeting = (meetLink: string) => {
+    if (!meetLink) {
+      toast({
+        title: "Error",
+        description: "Meeting link is not available",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    try {
+      // Ensure the URL is properly formatted
+      let formattedLink = meetLink;
+      if (!meetLink.startsWith('http')) {
+        formattedLink = `https://meet.google.com/${meetLink}`;
+      }
+      
+      // Open in new tab with proper Google Meet parameters
+      const meetUrl = new URL(formattedLink);
+      meetUrl.searchParams.set('authuser', '0');
+      meetUrl.searchParams.set('hs', '179');
+      
+      window.open(meetUrl.toString(), '_blank', 'noopener,noreferrer');
+    } catch (err) {
+      console.error("Error opening meeting link:", err);
+      toast({
+        title: "Error",
+        description: "Failed to open meeting link. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
 
   const handleCancelSession = (sessionId: string) => {
     try {
@@ -145,6 +208,26 @@ const BookedSessions = () => {
                   >
                     {session.status}
                   </Badge>
+                  {session.status === "confirmed" && (
+                    session.meetLink ? (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleJoinMeeting(session.meetLink!)}
+                        className="flex items-center gap-2"
+                      >
+                        <Video className="h-4 w-4" />
+                        Join Meeting
+                      </Button>
+                    ) : (
+                      <Alert variant="warning" className="py-2 px-3">
+                        <AlertCircle className="h-4 w-4" />
+                        <AlertDescription className="text-xs">
+                          Waiting for mentor to create meeting link
+                        </AlertDescription>
+                      </Alert>
+                    )
+                  )}
                   <Button
                     variant="destructive"
                     size="sm"
