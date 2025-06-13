@@ -40,7 +40,35 @@ Live Demo: [🔗 Video Demo](#)
 * Admin Panel with wallet, history, and mentor control
 
 ---
+## 📱 Application Screenshots
 
+### 1. Home Page
+![Home Page](public/screenshots/home-page.png)
+*Landing page with feature overview and navigation*
+
+### 2. Career Generator
+![Career Generator](public/screenshots/career-generator.png)
+*AI-powered career path recommendations based on your profile*
+
+### 3. Mentor Booking - Login
+![Mentor Booking Login](public/screenshots/mentor-booking-login.png)
+*Payman credentials input for secure connection*
+
+### 4. Mentor Booking - Mentor List
+![Mentor List](public/screenshots/mentor-list.png)
+*List of available mentors fetched from Payman payees*
+
+### 5. Booking Form
+![Booking Form](public/screenshots/booking-form.png)
+*Session booking form with payment integration*
+
+### 6. Resume ATS Checker
+![Resume Checker](public/screenshots/resume-checker.png)
+*Resume upload and ATS score analysis interface*
+
+### 7. Resume Results
+![Resume Results](public/screenshots/resume-results.png)
+*Detailed ATS score breakdown with improvement suggestions*
 ## 🧩 Application Flows
 
 ### 🧠 Career Path Flow
