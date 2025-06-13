@@ -9,6 +9,7 @@ const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState<any>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
   
   useEffect(() => {
     // Check for logged in user on component mount
@@ -16,6 +17,17 @@ const NavBar = () => {
     if (user) {
       setCurrentUser(JSON.parse(user));
     }
+
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const toggleMenu = () => {
@@ -32,7 +44,9 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-sm py-4 px-6">
+    <nav className={`sticky top-0 z-50 transition-all duration-300 py-4 px-6 ${
+      isScrolled ? "bg-white shadow-sm" : "bg-transparent"
+    }`}>
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
           <span className="career-gradient inline-block w-8 h-8 rounded-md"></span>

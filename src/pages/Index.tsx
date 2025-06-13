@@ -1,7 +1,7 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import NavBar from "@/components/NavBar";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 const Index = () => {
   return (
@@ -65,36 +65,36 @@ const Index = () => {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="career-card p-6">
-                <div className="w-12 h-12 bg-career-primary/10 text-career-primary rounded-lg flex items-center justify-center text-xl font-bold mb-4">
-                  1
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Share Your Profile</h3>
-                <p className="text-gray-600">
-                  Tell us about your education, experience, skills and career goals.
-                </p>
-              </div>
-              
-              <div className="career-card p-6">
-                <div className="w-12 h-12 bg-career-secondary/10 text-career-secondary rounded-lg flex items-center justify-center text-xl font-bold mb-4">
-                  2
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Get Your Career Path</h3>
-                <p className="text-gray-600">
-                  Our AI analyzes your profile and generates a personalized career roadmap.
-                </p>
-              </div>
-              
-              <div className="career-card p-6">
-                <div className="w-12 h-12 bg-career-accent/10 text-career-accent rounded-lg flex items-center justify-center text-xl font-bold mb-4">
-                  3
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Connect with Mentors</h3>
-                <p className="text-gray-600">
-                  Book sessions with experienced professionals to guide your career journey.
-                </p>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Career Path Card */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Career Path Generator</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">
+                    Get AI-powered career recommendations and personalized learning roadmaps.
+                  </p>
+                  <Button asChild>
+                    <Link to="/career-generator">Try Now</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* Mentor Booking Card */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Mentor Booking</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">
+                    Connect with experienced mentors and schedule personalized sessions.
+                  </p>
+                  <Button asChild>
+                    <Link to="/mentor-booking">Book Now</Link>
+                  </Button>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
