@@ -39,22 +39,45 @@ MentoerAI is a modern, AI-powered career guidance and mentorship booking platfor
 
 ## 📱 Application Screenshots
 
-<p align="center">
-  <img src="public/screenshots/home-page.PNG" alt="Home Page" width="250" style="border:1px solid #ccc; padding:4px;"/>
-  <img src="public/screenshots/career-generator.PNG" alt="Career Generator" width="250" style="border:1px solid #ccc; padding:4px;"/>
-  <img src="public/screenshots/mentor-booking-login.PNG" alt="Mentor Booking Login" width="250" style="border:1px solid #ccc; padding:4px;"/>
-</p>
+<div align="center">
+  <img src="public/screenshots/home-page.PNG" alt="Home Page" width="300" style="border:1px solid #ccc; padding:4px;" />
+  <p><em>Home Page</em></p>
+</div>
 
-<p align="center">
-  <img src="public/screenshots/mentor-list.PNG" alt="Mentor List" width="250" style="border:1px solid #ccc; padding:4px;"/>
-  <img src="public/screenshots/booking-form.PNG" alt="Booking Form" width="250" style="border:1px solid #ccc; padding:4px;"/>
-  <img src="public/screenshots/booked-session.PNG" alt="Booked Sessions" width="250" style="border:1px solid #ccc; padding:4px;"/>
-</p>
+<div align="center">
+  <img src="public/screenshots/career-generator.PNG" alt="Career Generator" width="300" style="border:1px solid #ccc; padding:4px;" />
+  <p><em>Career Generator</em></p>
+</div>
 
-<p align="center">
-  <img src="public/screenshots/resume-checker.PNG" alt="Resume Checker" width="250" style="border:1px solid #ccc; padding:4px;"/>
-  <img src="public/screenshots/resume-results.PNG" alt="Resume Results" width="250" style="border:1px solid #ccc; padding:4px;"/>
-</p>
+<div align="center">
+  <img src="public/screenshots/mentor-booking-login.PNG" alt="Mentor Booking Login" width="300" style="border:1px solid #ccc; padding:4px;" />
+  <p><em>Mentor Booking Login</em></p>
+</div>
+
+<div align="center">
+  <img src="public/screenshots/mentor-list.PNG" alt="Mentor List" width="300" style="border:1px solid #ccc; padding:4px;" />
+  <p><em>Mentor List</em></p>
+</div>
+
+<div align="center">
+  <img src="public/screenshots/booking-form.PNG" alt="Booking Form" width="300" style="border:1px solid #ccc; padding:4px;" />
+  <p><em>Booking Form</em></p>
+</div>
+
+<div align="center">
+  <img src="public/screenshots/booked-session.PNG" alt="Booked Sessions" width="300" style="border:1px solid #ccc; padding:4px;" />
+  <p><em>Booked Sessions</em></p>
+</div>
+
+<div align="center">
+  <img src="public/screenshots/resume-checker.PNG" alt="Resume Checker" width="300" style="border:1px solid #ccc; padding:4px;" />
+  <p><em>Resume ATS Checker</em></p>
+</div>
+
+<div align="center">
+  <img src="public/screenshots/resume-results.PNG" alt="Resume Results" width="300" style="border:1px solid #ccc; padding:4px;" />
+  <p><em>Resume Results</em></p>
+</div>
 
 ---
 
