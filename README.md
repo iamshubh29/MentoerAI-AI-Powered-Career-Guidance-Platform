@@ -78,7 +78,14 @@ MentoerAI is a modern, AI-powered career guidance and mentorship booking platfor
   <img src="public/screenshots/resume-results.PNG" alt="Resume Results" width="300" style="border:1px solid #ccc; padding:4px;" />
   <p><em>Resume Results</em></p>
 </div>
-
+<div align="center">
+  <img src="public/screenshots/Payees-payman_detail.PNG" alt="Payman dashboard" width="300" style="border:1px solid #ccc; padding:4px;" />
+  <p><em>Payman dashboard</em></p>
+</div>
+<div align="center">
+  <img src="public/screenshots/payees_Transaction.PNG" alt="Transaction Details" width="300" style="border:1px solid #ccc; padding:4px;" />
+  <p><em>Transaction Details</em></p>
+</div>
 ---
 
 ## 🧩 Application Flows
