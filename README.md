@@ -1,6 +1,6 @@
 # MentoerAI – AI-Powered Career Guidance Platform
 
-MentoerAI is a modern, AI-powered career guidance and mentorship booking platform integrated with **Payman**. It empowers users to generate personalized career paths using the **Gemini API**, analyze their resumes with an ATS tracker, and seamlessly book paid mentorship sessions. The platform ensures secure, direct payments to mentors (Payman payees) when sessions are booked, creating a transparent and trusted environment for both mentors and mentees.
+MentoerAI is a modern, AI-powered career guidance and mentorship booking platform integrated with **Payman**. It empowers users to generate personalized career paths using the **Gemini API**, analyze their resumes with an ATS tracker, and seamlessly book paid mentorship sessions. The platform ensures secure, direct payments to mentors (Payman payees) when sessions are booked, creating a transparent and  a trusted environment for both mentors and mentees.
 
 🌐 **Live App:** [🔗 Vercel Link](https://payman-project.vercel.app/)
 
